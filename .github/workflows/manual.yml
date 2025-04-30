@@ -1,0 +1,37 @@
+name: Auto Merge M2504 to M2506 to M2508
+
+on:
+  push:
+    branches:
+      - M2504  # Trigger only when commits are pushed to M2504
+
+jobs:
+  auto-merge:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Merge M2504 into M2506
+        uses: AT00640834
+        with:
+          source: M2504
+          target: M2506
+          method: merge
+          commit-message: "Auto merge M2504 into M2506"
+          merge-method: merge
+          github-token: ${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}
+
+      - name: Merge M2506 into M2508
+        uses: peter-evans/merge@v3
+        with:
+          source: M2506
+          target: M2508
+          method: merge
+          commit-message: "Auto merge M2506 into M2508"
+          merge-method: merge
+          github-token: ${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}
